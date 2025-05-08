@@ -4,3 +4,4 @@
 
 [Kanban progress board](https://github.com/users/rhea333/projects/2)
 
+[Figma Flow](https://www.figma.com/proto/6tsWsJmD9mT8GPEQuAzRNL/Student_Uber_App?node-id=1-26&t=P8yf7z67qPFjXGZI-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=8%3A168&show-proto-sidebar=1)
