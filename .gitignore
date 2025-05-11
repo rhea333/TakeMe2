@@ -56,6 +56,7 @@ packages/
 *.bak
 *.swp
 *.orig
+*.http
 
 # Optional: test results
 TestResults/
