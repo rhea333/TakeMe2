@@ -14,7 +14,7 @@ namespace Backend.Services.Impl
 
         public async Task<List<string>> GetUsers()
         {
-            return await repo.Users.Select(u => u.Email).ToListAsync();
+            return await repo.Users.Select(u => u.Email + " " + u.School_Name + " " + u.Birthday).ToListAsync();
         }
     }
 }
