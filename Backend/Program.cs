@@ -3,7 +3,18 @@ using Backend.Services;
 using Backend.Services.Impl;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    WebRootPath = "wwwroot"
+});
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(Int32.Parse(port));
+});
 
 // Add services to the container.
 
@@ -12,8 +23,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Override configuration with environment variable
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
 builder.Services.AddDbContext<RepoContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"), sqlOptions =>
+    options.UseSqlServer(connectionString, sqlOptions =>
         sqlOptions.EnableRetryOnFailure())); // Add retry logic here
 
 builder.Services.AddScoped<IUsersServices, UserServices>();
@@ -35,5 +49,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/", () => Results.Ok("OK"));
 
 app.Run();
