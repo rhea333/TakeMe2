@@ -19,7 +19,7 @@ namespace Backend.JsonModels
     public class SchoolInfo
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
         public required string Email { get; set; }
 
         [Required]

@@ -7,7 +7,7 @@ namespace Backend.Repo
     {
         [Key]
         [MaxLength(255)]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
         public required string Email { get; set; }
 
         [Required]

@@ -8,7 +8,7 @@ namespace Backend.Repo
         [Key]
         [MaxLength(255)]
         [ForeignKey("Users")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
         public required string Email { get; set; }
 
         public required Users Users { get; set; }
