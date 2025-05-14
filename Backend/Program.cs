@@ -44,6 +44,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// TEMP MEASURE, DELETE LATER
+else
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.RoutePrefix = "swagger";
+    });
+}
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
