@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Backend.Services;
+using Backend.JsonModels;
 
 namespace Backend.Controllers
 {
@@ -25,6 +26,28 @@ namespace Backend.Controllers
             catch (Exception ex)
             {
                 return Problem(ex.Message);
+            }
+        }
+
+        [HttpPost("registerUser")]
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequest req)
+        {
+            try
+            {
+                await _userServices.RegisterUser(req);
+                return Ok("User created successfully");
+            }
+            catch (Exception ex)
+            {
+                var exceptionMessage = ex.Message;
+
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    exceptionMessage += " ; " + ex.Message;
+                }
+
+                return Problem(exceptionMessage);
             }
         }
     }

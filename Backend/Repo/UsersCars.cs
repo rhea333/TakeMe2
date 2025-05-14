@@ -7,9 +7,22 @@ namespace Backend.Repo
     {
         [Key]
         [MaxLength(255)]
-        [ForeignKey("User")]
-        public string Email { get; set; } = string.Empty;
+        [ForeignKey("Users")]
+        [EmailAddress]
+        public required string Email { get; set; }
 
-        public Users Users { get; set; } = null!;
+        public required Users Users { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public required string Make { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public required string Model { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public required string Plate { get; set; }
     }
 }

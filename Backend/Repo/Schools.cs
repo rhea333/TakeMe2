@@ -6,6 +6,6 @@ namespace Backend.Repo
     {
         [Key]
         [MaxLength(255)]
-        public string School_Name { get; set; } = string.Empty;
+        public required string School_Name { get; set; }
     }
 }

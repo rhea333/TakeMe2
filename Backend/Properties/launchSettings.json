@@ -17,8 +17,8 @@
       "applicationUrl": "http://localhost:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_CONNECTION_STRING": "Server=takeme2server.database.windows.net;Database=takeme2Prod;User ID=takeme2;Password=Almonds456;Encrypt=True;TrustServerCertificate=True;Connection Timeout=120;",
-        //"DB_CONNECTION_STRING": "Server=localhost;Database=takeme2;Trusted_Connection=True;Encrypt=False;"
+        //"DB_CONNECTION_STRING": "Server=takeme2server.database.windows.net;Database=takeme2Prod;User ID=takeme2;Password=Almonds456;Encrypt=True;TrustServerCertificate=True;Connection Timeout=120;",
+        "DB_CONNECTION_STRING": "Server=localhost;Database=takeme2;Trusted_Connection=True;Encrypt=False;",
         "PORT": "8080"
       }
     },
@@ -30,8 +30,8 @@
       "applicationUrl": "http://localhost:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_CONNECTION_STRING": "Server=takeme2server.database.windows.net;Database=takeme2Prod;User ID=takeme2;Password=Almonds456;Encrypt=True;TrustServerCertificate=True;Connection Timeout=120;",
-        //"DB_CONNECTION_STRING": "Server=localhost;Database=takeme2;Trusted_Connection=True;Encrypt=False;"
+        //"DB_CONNECTION_STRING": "Server=takeme2server.database.windows.net;Database=takeme2Prod;User ID=takeme2;Password=Almonds456;Encrypt=True;TrustServerCertificate=True;Connection Timeout=120;",
+        "DB_CONNECTION_STRING": "Server=localhost;Database=takeme2;Trusted_Connection=True;Encrypt=False;",
         "PORT": "8080"
       }
     },

@@ -7,38 +7,37 @@ namespace Backend.Repo
     {
         [Key]
         [MaxLength(255)]
-        public string Email { get; set; } = string.Empty;
+        [EmailAddress]
+        public required string Email { get; set; }
 
         [Required]
-        public string PasswordHash { get; set; } = string.Empty;
-
-        [Required]
-        [MaxLength(255)]
-        public string First_Name { get; set; } = string.Empty;
+        public required string PasswordHash { get; set; }
 
         [Required]
         [MaxLength(255)]
-        public string Last_Name { get; set;} = string.Empty;
+        public required string First_Name { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public required string Last_Name { get; set;}
 
         [Required]
         [MaxLength(255)]
         public string Pronouns { get; set; } = string.Empty;
 
-        [Required]
         public DateTime Birthday { get; set; } = new DateTime(1900, 1, 1);
 
         [Required]
         [MaxLength(255)]
         [ForeignKey("Schools")]
-        public string School_Name { get; set; } = string.Empty;
+        public required string School_Name { get; set; }
 
-        public Schools Schools { get; set; } = null!;
+        public Schools? Schools { get; set; }
 
         [Required]
         [MaxLength(255)]
         public string School_Type { get; set; } = string.Empty;
 
-        [Required]
         public int School_Year { get; set; } = -1;
 
         [Required]
