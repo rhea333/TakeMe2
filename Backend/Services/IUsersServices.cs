@@ -8,5 +8,7 @@ namespace Backend.Services
         Task<List<string>> GetUsers();
 
         Task RegisterUser(RegisterUserRequest req);
+
+        Task uploadRegistrationImages(RegistrationUploadImagesReq req);
     }
 }

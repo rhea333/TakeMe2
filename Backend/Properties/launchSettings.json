@@ -17,8 +17,8 @@
       "applicationUrl": "http://localhost:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        //"DB_CONNECTION_STRING": "Server=takeme2server.database.windows.net;Database=takeme2Prod;User ID=takeme2;Password=Almonds456;Encrypt=True;TrustServerCertificate=True;Connection Timeout=120;",
         "DB_CONNECTION_STRING": "Server=localhost;Database=takeme2;Trusted_Connection=True;Encrypt=False;",
+        "AzureBlobStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=takeme2blobtest;AccountKey=vuM17cHpyaLf+el2iljR+wXvqWz6Eo3sywL9tFZltTAQ+J7dgamSnaMSU41bFCGJV+rilq//unA4+AStQprN2A==;EndpointSuffix=core.windows.net",
         "PORT": "8080"
       }
     },
@@ -30,8 +30,8 @@
       "applicationUrl": "http://localhost:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        //"DB_CONNECTION_STRING": "Server=takeme2server.database.windows.net;Database=takeme2Prod;User ID=takeme2;Password=Almonds456;Encrypt=True;TrustServerCertificate=True;Connection Timeout=120;",
         "DB_CONNECTION_STRING": "Server=localhost;Database=takeme2;Trusted_Connection=True;Encrypt=False;",
+        "AzureBlobStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=takeme2blobtest;AccountKey=vuM17cHpyaLf+el2iljR+wXvqWz6Eo3sywL9tFZltTAQ+J7dgamSnaMSU41bFCGJV+rilq//unA4+AStQprN2A==;EndpointSuffix=core.windows.net",
         "PORT": "8080"
       }
     },

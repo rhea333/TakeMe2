@@ -1,19 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Backend.Services;
 using Backend.JsonModels;
+using Backend.Utility;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController(IUsersServices _userServices) : ControllerBase
     {
-        private readonly IUsersServices _userServices;
-
-        public UsersController(IUsersServices userServices)
-        {
-            _userServices = userServices;
-        }
 
         [HttpGet("getUsers")]
         public async Task<IActionResult> GetAdminUsernames()
@@ -25,7 +20,7 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                return Problem(ex.Message);
+                return Problem(Utilities.GetExceptionMessage(ex));
             }
         }
 
@@ -39,15 +34,21 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                var exceptionMessage = ex.Message;
+                return Problem(Utilities.GetExceptionMessage(ex));
+            }
+        }
 
-                while (ex.InnerException != null)
-                {
-                    ex = ex.InnerException;
-                    exceptionMessage += " ; " + ex.Message;
-                }
-
-                return Problem(exceptionMessage);
+        [HttpPost("uploadRegistrationImages")]
+        public async Task<IActionResult> UploadImagesForRegistration([FromForm] RegistrationUploadImagesReq req)
+        {
+            try
+            {
+                await _userServices.uploadRegistrationImages(req);
+                return Ok("Images uploaded successfully");
+            }
+            catch (Exception ex)
+            {
+                return Problem(Utilities.GetExceptionMessage(ex));
             }
         }
     }

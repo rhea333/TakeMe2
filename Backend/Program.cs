@@ -1,3 +1,4 @@
+using Backend.BlobStorage;
 using Backend.Repo;
 using Backend.Services;
 using Backend.Services.Impl;
@@ -31,6 +32,7 @@ builder.Services.AddDbContext<RepoContext>(options =>
         sqlOptions.EnableRetryOnFailure())); // Add retry logic here
 
 builder.Services.AddScoped<IUsersServices, UserServices>();
+builder.Services.AddSingleton<BlobStorageService>();
 
 var app = builder.Build();
 

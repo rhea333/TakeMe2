@@ -1,18 +1,15 @@
-﻿using Backend.JsonModels;
+﻿using Backend.BlobStorage;
+using Backend.JsonModels;
 using Backend.Repo;
+using Backend.Utility;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.Impl
 {
-    public class UserServices : IUsersServices
+    public class UserServices(RepoContext repo, BlobStorageService blob) : IUsersServices
     {
-        private readonly RepoContext repo;
 
-        public UserServices(RepoContext repo)
-        {
-            this.repo = repo;
-        }
-
+        private readonly List<string> validImageNames = [ "Profile", "School_Id", "Drivers_License" ];
         public async Task<List<string>> GetUsers()
         {
             return await repo.Users.Select(u => u.Email + " " + u.School_Name + " " + u.Birthday).ToListAsync();
@@ -25,7 +22,7 @@ namespace Backend.Services.Impl
             var profile = req.Profile;
             var carInfo = req.Car_Info;
 
-            validateSchoolIsValid(school.Name);
+            ValidateSchoolIsValid(school.Name);
 
             var user = new Users
             {
@@ -60,16 +57,54 @@ namespace Backend.Services.Impl
                 repo.UsersCars.Add(car);
             }
 
-            repo.SaveChanges();
+            await repo.SaveChangesAsync();
         }
 
-        private void validateSchoolIsValid(string school_name)
+        private void ValidateSchoolIsValid(string school_name)
         {
             if (!repo.Schools.Any(s => s.School_Name == school_name))
             {
                 throw new Exception("Must enter a valid school name");
             }
 
+        }
+
+        public async Task uploadRegistrationImages(RegistrationUploadImagesReq req)
+        {
+            var images = req.Images;
+
+            var image_names = req.Image_Names;
+
+            var folder = Utilities.GetBlobFolderFromEmail(req.Email);
+
+            ValidateRegistrationImagesInput(req);
+
+            for (int i = 0; i < images.Count; i++)
+            {
+                var image = images[i];
+                var image_name = image_names[i];
+                var ext = Path.GetExtension(image.FileName);
+
+                var blobName = $"{folder}/{image_name}";
+                await blob.UploadFileAsync(image, blobName, ext);
+            }
+        }
+
+        private void ValidateRegistrationImagesInput(RegistrationUploadImagesReq req)
+        {
+            var images = req.Images;
+
+            var image_names = req.Image_Names;
+
+            if (images.Count != image_names.Count)
+            {
+                throw new Exception("Each file must have their matching name");
+            }
+
+            if (image_names.Any(img => !validImageNames.Contains(img)))
+            {
+                throw new Exception("Inputted image names" + image_names.Select(img => !validImageNames.Contains(img)) + " are not valid");
+            }
         }
     }
 }
